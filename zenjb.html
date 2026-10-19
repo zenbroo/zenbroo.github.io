@@ -10,24 +10,17 @@
         margin: 0;
         padding: 0;
         min-height: 100%;
-        /* Gradasi warna latar belakang ungu gelap sesuai konsep gambar Anda */
         background: radial-gradient(circle, #270d57 0%, #0a0409 100%);
         color: #c8ced8;
         font: 25px/1.45 "Segoe UI", system-ui, sans-serif;
         overflow: hidden;
       }
-
-      /* --- EDIT CSS LANGKAH 1 & 2 UNTUK MEMINDAHKAN LOGO HTML KE TENGAH --- */
-
-      /* Mengatur header brand atas agar tetap rapi tanpa merusak teksnya */
-      #brand {
         text-align: center;
         padding: 20px 20px;
         background: rgba(11, 13, 16, 0.5);
         border-bottom: 3px solid #00f3ff;
         box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
       }
-
       #brand b {
         font-size: 100px;
         font-weight: 800;
@@ -36,25 +29,20 @@
         text-shadow: 0 0 10px rgba(0, 243, 255, 0.8), 0 0 30px rgba(0, 242, 255, 0.768);
         text-transform: uppercase;
       }
-
-      /* KUNCI UTAMA: Memaksa tag img dari atas agar turun ke tengah layar secara presisi */
       #brand img {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 160px;  /* Mengatur ukuran logo di tengah */
-        height: 160px; /* Mengatur ukuran logo di tengah */
-        border-radius: 50%; /* Membuat logo melingkar sempurna */
-        box-shadow: 0 0 20px rgba(0, 243, 255, 0.8); /* Efek glow ungu pada logo */
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
         z-index: 1;
       }
-
-      /* Elemen #wrap dikosongkan karena logo sudah ditarik langsung dari tag img HTML */
       #wrap {
         display: none; 
       }
-
       #spin {
         position: fixed;
         top: 50%;
@@ -64,38 +52,26 @@
         margin: -92px 0 0 -92px; 
         border-radius: 50%;
         z-index: 2;
-        
-        /* METODE AMAN PS4: Menggunakan border solid transparan dikombinasikan dengan border warna */
         border: 4px solid rgba(0, 243, 255, 0.05);
-        border-top-color: #ff007f; /* Aksen warna Magenta */
-        border-right-color: #00f3ff; /* Aksen warna Cyan */
-        
-        /* Efek bayangan cahaya neon tebal yang sangat aman dibaca oleh RAM PS4 */
+        border-top-color: #ff007f;
+        border-right-color: #00f3ff;
         box-shadow: 0 0 20px rgba(0, 243, 255, 0.4), inset 0 0 10px rgba(255, 0, 127, 0.2);
-        
-        /* Menggunakan efek putaran ease-in-out yang lebih estetik dan dinamis di layar TV */
         animation: spinPS4 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
       }
-
-      /* ANIMASI KHUSUS PS4: Membuat loading berputar dengan efek akselerasi (tidak kaku) */
       @keyframes spinPS4 {
         0% { 
           transform: rotate(0deg); 
         }
         50% {
-          /* Memberikan efek sedikit melambat di tengah untuk gaya estetik */
           box-shadow: 0 0 30px rgba(255, 0, 127, 0.6);
         }
         100% { 
           transform: rotate(360deg); 
         }
       }
-
-            /* --- PERBAIKAN ANIMASI TEKS STATUS KHUSUS PS4 --- */
       #msg {
         display: block !important; 
         position: fixed;
-        /* Mengunci posisi teks tepat di bawah logo tengah secara presisi */
         top: calc(50% + 130px); 
         left: 0;
         right: 0;
@@ -107,24 +83,17 @@
         text-transform: uppercase;
         z-index: 3;
       }
-      
       #wrap {
         padding: 0;
       }
-      
       #state,
       #out {
         display: none;
       }
-
-      /* 1. KONDISI SAAT LOADING (PROSES BERJALAN DI LATAR BELAKANG) */
-      /* Menggunakan trik menyembunyikan ukuran huruf teks asli agar yang muncul hanya teks kustom */
       body:not(.done):not(.fail):not(.log) #msg {
         font-size: 0 !important;
-        /* Menjalankan animasi opacity berdenyut yang 100% didukung browser PS4 */
         animation: pulseTextPS4 1.5s ease-in-out infinite;
       }
-      /* Menyuntikkan teks kustom Anda dengan format warna putih solid yang aman */
       body:not(.done):not(.fail):not(.log) #msg::after {
         content: "ZENBROO MENGAKTIFKAN HEN PS4";
         display: block;
@@ -132,43 +101,34 @@
         color: #ffffff;
         text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
       }
-
-      /* 2. KONDISI SAAT BERHASIL (DONE) */
       body.done #spin {
         display: none;
       }
       body.done #msg {
         font-size: 19px !important;
-        color: #d6fcfe; /* Pesan asli sistem otomatis muncul dengan warna Cyan Neon */
+        color: #d6fcfe;
         text-shadow: 0 0 10px rgba(0, 243, 255, 0.8);
-        animation: none; /* Mematikan animasi denyut saat sudah selesai */
+        animation: none;
       }
       body.done #msg::after {
         content: none;
       }
-
-      /* 3. KONDISI SAAT GAGAL / REFRESH (FAIL) */
       body.fail #spin {
         display: none;
       }
       body.fail #msg {
         font-size: 19px !important;
-        color: hsl(345, 100%, 92%); /* Pesan asli sistem otomatis muncul dengan warna Magenta Neon */
+        color: hsl(345, 100%, 92%);
         text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
-        animation: none; /* Mematikan animasi denyut saat gagal */
+        animation: none;
       }
       body.fail #msg::after {
         content: none;
       }
-
-      /* ANIMASI KHUSUS PS4: Mengubah kejelasan seluruh elemen (sangat ringan dan didukung penuh) */
       @keyframes pulseTextPS4 {
         0%, 100% { opacity: 0.4; }
         50% { opacity: 1; }
       }
-
-
-      /* KONDISI 4: ?log=1 -- MODE LOG TEKS PENUH */
       body.log #spin,
       body.log #msg {
         display: none;
@@ -197,21 +157,16 @@
         overflow-y: auto;
         color: #9fb3d0;
       }
-
-      /* Warna teks log bawaan jb.js */
       .ok { color: #7fd0a0; }
       .bad { color: #d08a7f; }
       .warn { color: #d8c07f; }
       .safe { color: #7fd0a0; }
       .danger { color: #d08a7f; }
       code { color: #9fb3d0; }
-
-      /* Animasi teks halus saat proses loading awal */
       @keyframes pulseText {
         0%, 100% { opacity: 0.6; }
         50% { opacity: 1; }
       }
-
     </style>
   </head>
   <body>
